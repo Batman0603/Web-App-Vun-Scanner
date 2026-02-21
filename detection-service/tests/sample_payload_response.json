@@ -1,0 +1,10 @@
+{
+  "baseline_length": 528,
+  "payload_type": "sqli",
+  "results": [
+    {
+      "payload": "SQL_TEST_123",
+      "length": 600
+    }
+  ]
+}
