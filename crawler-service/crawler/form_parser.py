@@ -1,6 +1,22 @@
+"""
+Extracts HTML form details from a web page.
+
+This module uses BeautifulSoup to parse HTML and find all `<form>` tags,
+extracting key information like the action, method, and input field names.
+"""
 from bs4 import BeautifulSoup
 
 def extract_forms(html: str):
+    """
+    Parses HTML to find and return details of all forms.
+
+    Args:
+        html (str): The HTML content of the page as a string.
+
+    Returns:
+        list: A list of dictionaries, where each dictionary represents a form
+              and contains its 'action', 'method', and a list of 'inputs'.
+    """
     soup = BeautifulSoup(html, "lxml")
     forms_data = []
 
