@@ -1,0 +1,47 @@
+version: "3.9"
+
+services:
+
+  crawler-service:
+    build: ./crawler-service
+    container_name: crawler-service
+    ports:
+      - "8001:8000"
+    restart: always
+    networks:
+      - scanner-network
+
+  payload-service:
+    build: ./payload-service
+    container_name: payload-service
+    ports:
+      - "8002:8000"
+    restart: always
+    networks:
+      - scanner-network
+
+  detection-service:
+    build: ./detection-service
+    container_name: detection-service
+    ports:
+      - "8003:8000"
+    restart: always
+    networks:
+      - scanner-network
+
+  api-gateway:
+    build: ./api-gateway
+    container_name: api-gateway
+    ports:
+      - "8000:8000"
+    depends_on:
+      - crawler-service
+      - payload-service
+      - detection-service
+    restart: always
+    networks:
+      - scanner-network
+
+networks:
+  scanner-network:
+    driver: bridge
