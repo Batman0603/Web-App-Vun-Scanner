@@ -1,0 +1,367 @@
+{
+  "examples": [
+    {
+      "name": "GitHub Login",
+      "request": {
+        "url": "https://github.com/login",
+        "forms": [
+          {
+            "action": "/session",
+            "method": "POST",
+            "inputs": [
+              {"name": "commit"},
+              {"name": "login"},
+              {"name": "password"},
+              {"name": "return_to"},
+              {"name": "trusted_device"}
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "LinkedIn Login",
+      "request": {
+        "url": "https://www.linkedin.com/login",
+        "forms": [
+          {
+            "action": "/checkpoint/lg/login-submit",
+            "method": "POST",
+            "inputs": [
+              {"name": "email"},
+              {"name": "password"},
+              {"name": "loginCsrfParam"},
+              {"name": "session_redirect"}
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "Facebook Search",
+      "request": {
+        "url": "https://www.facebook.com/search?q=security&t=events",
+        "forms": [
+          {
+            "action": "/search/",
+            "method": "GET",
+            "inputs": [
+              {"name": "q"},
+              {"name": "t"},
+              {"name": "vertical"},
+              {"name": "page"}
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "Amazon Product Search",
+      "request": {
+        "url": "https://www.amazon.com/s?k=laptop&i=computers&page=1&pf_rd_p=123",
+        "forms": [
+          {
+            "action": "/s",
+            "method": "GET",
+            "inputs": [
+              {"name": "k"},
+              {"name": "i"},
+              {"name": "page"},
+              {"name": "minPrice"},
+              {"name": "maxPrice"},
+              {"name": "rh"}
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "eBay Auction",
+      "request": {
+        "url": "https://www.ebay.com/sch/i.html?_nkw=iphone&_sacat=0&_ipg=60&_price=100-500",
+        "forms": [
+          {
+            "action": "/sch/items/",
+            "method": "GET",
+            "inputs": [
+              {"name": "_nkw"},
+              {"name": "_sacat"},
+              {"name": "_price"},
+              {"name": "_ipg"},
+              {"name": "_sop"}
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "Google Search",
+      "request": {
+        "url": "https://www.google.com/search?q=web+vulnerability&hl=en&num=10&start=0",
+        "forms": [
+          {
+            "action": "/search",
+            "method": "GET",
+            "inputs": [
+              {"name": "q"},
+              {"name": "hl"},
+              {"name": "num"},
+              {"name": "start"},
+              {"name": "safe"}
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "Twitter/X Search",
+      "request": {
+        "url": "https://twitter.com/search?q=cybersecurity&src=typed_query&f=live&lang=en",
+        "forms": [
+          {
+            "action": "/search",
+            "method": "GET",
+            "inputs": [
+              {"name": "q"},
+              {"name": "src"},
+              {"name": "f"},
+              {"name": "lang"},
+              {"name": "vertical"}
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "Instagram Login",
+      "request": {
+        "url": "https://www.instagram.com/accounts/login/",
+        "forms": [
+          {
+            "action": "/accounts/login/ajax/",
+            "method": "POST",
+            "inputs": [
+              {"name": "username"},
+              {"name": "password"},
+              {"name": "login_attempt_count"},
+              {"name": "enc_password"}
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "YouTube Search",
+      "request": {
+        "url": "https://www.youtube.com/results?search_query=hacking&sp=CAIQARgA",
+        "forms": [
+          {
+            "action": "/results",
+            "method": "GET",
+            "inputs": [
+              {"name": "search_query"},
+              {"name": "sp"},
+              {"name": "page"}
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "Airbnb Booking",
+      "request": {
+        "url": "https://www.airbnb.com/homes?checkin=2026-03-01&checkout=2026-03-08&guests=2&tab_id=home_tab",
+        "forms": [
+          {
+            "action": "/homes",
+            "method": "GET",
+            "inputs": [
+              {"name": "checkin"},
+              {"name": "checkout"},
+              {"name": "guests"},
+              {"name": "price_min"},
+              {"name": "price_max"},
+              {"name": "room_types"}
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "Booking.com Search",
+      "request": {
+        "url": "https://www.booking.com/searchresults.html?ss=New+York&checkin=2026-03-01&checkout=2026-03-08",
+        "forms": [
+          {
+            "action": "/search",
+            "method": "GET",
+            "inputs": [
+              {"name": "ss"},
+              {"name": "checkin"},
+              {"name": "checkout"},
+              {"name": "group_adults"},
+              {"name": "order"}
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "Reddit Login",
+      "request": {
+        "url": "https://www.reddit.com/login",
+        "forms": [
+          {
+            "action": "/api/login",
+            "method": "POST",
+            "inputs": [
+              {"name": "username"},
+              {"name": "password"},
+              {"name": "rem"},
+              {"name": "api_type"}
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "PayPal Login",
+      "request": {
+        "url": "https://www.paypal.com/signin",
+        "forms": [
+          {
+            "action": "/signin/",
+            "method": "POST",
+            "inputs": [
+              {"name": "email"},
+              {"name": "password"},
+              {"name": "loginType"},
+              {"name": "country"}
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "Stripe Checkout",
+      "request": {
+        "url": "https://checkout.stripe.com/pay/cs_test_abc123",
+        "forms": [
+          {
+            "action": "/v1/charges",
+            "method": "POST",
+            "inputs": [
+              {"name": "email"},
+              {"name": "card[number]"},
+              {"name": "card[exp_month]"},
+              {"name": "card[exp_year]"},
+              {"name": "card[cvc]"}
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "OWASP WebGoat",
+      "request": {
+        "url": "http://localhost:8080/WebGoat/attack?Screen=1&menu=900",
+        "forms": [
+          {
+            "action": "/WebGoat/attack",
+            "method": "GET",
+            "inputs": [
+              {"name": "Screen"},
+              {"name": "menu"},
+              {"name": "lesson"}
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "WordPress Login",
+      "request": {
+        "url": "https://example.wordpress.com/wp-login.php",
+        "forms": [
+          {
+            "action": "/wp-login.php",
+            "method": "POST",
+            "inputs": [
+              {"name": "log"},
+              {"name": "pwd"},
+              {"name": "wp-submit"},
+              {"name": "redirect_to"}
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "Shopify Product Search",
+      "request": {
+        "url": "https://example.myshopify.com/search?q=laptop&type=product",
+        "forms": [
+          {
+            "action": "/search",
+            "method": "GET",
+            "inputs": [
+              {"name": "q"},
+              {"name": "type"},
+              {"name": "sort"}
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "Jira Login",
+      "request": {
+        "url": "https://jira.example.com/secure/RapidBoard.jspa?rapidView=1",
+        "forms": [
+          {
+            "action": "/secure/login.jsp",
+            "method": "POST",
+            "inputs": [
+              {"name": "username"},
+              {"name": "password"},
+              {"name": "login"},
+              {"name": "os_destination"}
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "Jenkins Admin Panel",
+      "request": {
+        "url": "https://jenkins.example.com/login?from=%2F",
+        "forms": [
+          {
+            "action": "/j_acegi_security_check",
+            "method": "POST",
+            "inputs": [
+              {"name": "j_username"},
+              {"name": "j_password"},
+              {"name": "from"}
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "Apache Hadoop NameNode",
+      "request": {
+        "url": "http://hadoop-master:50070/dfshealth.html",
+        "forms": [
+          {
+            "action": "/getStatus",
+            "method": "GET",
+            "inputs": [
+              {"name": "mnode"}
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}
