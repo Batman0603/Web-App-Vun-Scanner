@@ -1,3 +1,4 @@
+# SQL Injection test payloads
 SQL_TEST_123
 SQL_LOGIC_TEST
 SQL_MARKER_TEST

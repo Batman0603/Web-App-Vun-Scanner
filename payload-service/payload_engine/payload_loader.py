@@ -3,28 +3,37 @@ from utils.logger import get_logger
 
 logger = get_logger("PayloadLoader")
 
+
 class PayloadLoader:
-    def __init__(self, mode="dummy"):
-        self.base_path = Path("payloads") / mode
+    def __init__(self, base_dir: str = "payloads"):
+        self.base_dir = Path(base_dir)
 
-    def load(self, payload_type: str) -> list:
-        file_path = self.base_path / f"{payload_type}.txt"
+    def load(self, payload_type: str) -> list[str]:
+        """
+        Load payloads from payloads/<type>.txt
+        Returns list of payload strings.
+        """
 
-        if not file_path.exists():
-            logger.warning(f"Payload file missing: {file_path}")
+        payload_file = self.base_dir / "dummy" / f"{payload_type}.txt"
+
+        if not payload_file.exists():
+            logger.warning(f"Payload file not found: {payload_file}")
             return []
 
-        try:
-            with open(file_path, "r", encoding="utf-8") as f:
-                payloads = [
-                    line.strip()
-                    for line in f
-                    if line.strip() and not line.startswith("#")
-                ]
+        payloads: list[str] = []
 
-            logger.info(f"Loaded {len(payloads)} payloads from {file_path}")
+        try:
+            with payload_file.open("r", encoding="utf-8") as f:
+                for line in f:
+                    line = line.strip()
+                    if line and not line.startswith("#"):
+                        payloads.append(line)
+
+            logger.info(
+                f"Loaded {len(payloads)} payloads from {payload_file}"
+            )
             return payloads
 
         except Exception as e:
-            logger.error(f"Failed to load payloads: {e}")
+            logger.error(f"Failed loading payloads: {e}")
             return []
