@@ -1,13 +1,20 @@
 class ResponseDiff:
-    """
-    Compares baseline response with injected responses.
-    """
+    LENGTH_THRESHOLD = 20
 
     @staticmethod
-    def diff(baseline_length: int, injected_length: int) -> dict:
-        delta = injected_length - baseline_length
+    def analyze(baseline: dict, results: list) -> dict:
+        diffs = []
+        base_len = baseline.get("length", 0)
+        base_status = baseline.get("status")
+
+        for r in results:
+            diffs.append({
+                "payload": r.get("payload"),
+                "length_delta": abs(r.get("length", 0) - base_len),
+                "status_changed": r.get("status") != base_status
+            })
 
         return {
-            "length_delta": delta,
-            "significant": abs(delta) > 20  # threshold
+            "baseline_length": base_len,
+            "diffs": diffs
         }

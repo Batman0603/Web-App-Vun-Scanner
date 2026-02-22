@@ -189,3 +189,33 @@ def inject(request: InjectRequest):
             status_code=500,
             detail="Internal server error"
         )
+
+@app.post("/analyze")
+def analyze(payload_response: dict):
+    try:
+        diff = ResponseDiff.analyze(
+            payload_response["baseline"],
+            payload_response["results"]
+        )
+
+        payload_response["response_diff"] = diff
+
+        evidence = EvidenceEngine.extract(payload_response)
+        score = ConfidenceScore.calculate(evidence)
+
+        payload_type = payload_response["payload_decision"]["recommended_payload_type"]
+        vuln = VulnerabilityMapper.map(payload_type, score)
+
+        return {
+            "type": vuln["type"],
+            "confidence": score,
+            "severity": vuln["severity"],
+            "owasp_category": vuln["owasp_category"],
+            "evidence": evidence
+        }
+
+    except KeyError as e:
+        raise HTTPException(422, f"Missing field: {e}")
+
+    except Exception:
+        raise HTTPException(500, "Detection service failure")
