@@ -1,0 +1,9 @@
+{ "target": "http://httpbin.org", "vulnerabilities": [
+    {
+      "type": "SQL Injection", "severity": "Medium", "confidence": 60, "owasp_category": 
+      "A03:2021 Injection", "evidence": {
+        "reflection": true, "error_pattern": true, "consistent_anomaly": true
+      }
+    }
+  ]
+}
