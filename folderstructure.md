@@ -141,3 +141,16 @@ shared/
     detection-service
 
     report-service
+
+
+Order of execution
+
+1. Crawler Service
+
+2. Attack Surface Service
+
+3. Payload Service
+
+4. Detection Service
+
+5. Report Service

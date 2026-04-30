@@ -74,8 +74,7 @@ def analyze_surface(payload: CrawlerOutput):
         raise HTTPException(status_code=400, detail="Crawler output required. The 'data' field cannot be empty.")
 
     try:
-        # Convert Pydantic models to dicts for the service
-        surface_data = [p.model_dump() for p in payload.data]
+        surface_data = payload.data
         surface = SurfaceService.build_attack_surface(surface_data)
 
         return {
@@ -84,5 +83,5 @@ def analyze_surface(payload: CrawlerOutput):
         }
 
     except Exception as e:
-        logger.error(f"Analyze failed: {e}")
+        logger.exception(f"Analyze failed due to an unexpected error: {e}")
         raise HTTPException(status_code=500, detail="An internal server error occurred during analysis.")

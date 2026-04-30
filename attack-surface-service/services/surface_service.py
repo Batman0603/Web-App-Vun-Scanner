@@ -1,4 +1,6 @@
 from typing import List, Dict
+from urllib.parse import urljoin
+from collections import defaultdict
 from surface.parameter_mapper import ParameterMapper
 from surface.context_identifier import ContextIdentifier
 from utils.logger import get_logger
@@ -9,49 +11,50 @@ class SurfaceService:
 
     @staticmethod
     def build_attack_surface(crawler_output) -> List[Dict]:
-        from surface.attack_object import AttackObject
-
-        attack_surface = []
+        surface_map = defaultdict(set)
 
         try:
-            # Handle both single dict and list of dicts
             pages = [crawler_output] if isinstance(crawler_output, dict) else crawler_output
             
             for page in pages:
-
-                url = page.get("url")
-                forms = page.get("forms", [])
-
-                if not url:
+                # If passed as Pydantic models, use .url; if dict, use .get()
+                url = getattr(page, "url", page.get("url") if isinstance(page, dict) else None)
+                if not url or any(url.endswith(ext) for ext in ['.jpg', '.png', '.pdf', '.css', '.js']):
                     continue
 
-                # Query parameters
+                forms = getattr(page, "forms", page.get("forms", []) if isinstance(page, dict) else [])
+
+                # Process Query parameters from URL
                 query_params = ParameterMapper.extract_from_url(url)
                 for param in query_params:
-                    attack_surface.append(
-                        AttackObject(
-                            url=url,
-                            method="GET",
-                            parameter=param,
-                            context=ContextIdentifier.identify_from_url()
-                        ).to_dict()
-                    )
+                    surface_map[(url, "GET")].add(param)
 
-                # Form parameters
+                # Process Form parameters
                 for form in forms:
-                    form_params = ParameterMapper.extract_from_forms([form])
-                    context = ContextIdentifier.identify_from_form(form)
-                    method = form.get("method", "POST").upper()
-
+                    # Handle both Pydantic objects and dicts
+                    if not isinstance(form, dict):
+                        form_dict = form.model_dump()
+                    else:
+                        form_dict = form
+                        
+                    form_params = ParameterMapper.extract_from_forms([form_dict])
+                    method = form_dict.get("method", "POST").upper()
+                    
+                    # Resolve relative action URLs
+                    action = form_dict.get("action")
+                    target_url = urljoin(url, action) if action else url
+                    
                     for param in form_params:
-                        attack_surface.append(
-                            AttackObject(
-                                url=url,
-                                method=method,
-                                parameter=param,
-                                context=context
-                            ).to_dict()
-                        )
+                        surface_map[(target_url, method)].add(param)
+
+            # Convert the grouped map into a list of dictionaries matching AttackPoint schema
+            attack_surface = [
+                {
+                    "url": url,
+                    "method": method,
+                    "parameters": sorted(list(params))
+                } for (url, method), params in surface_map.items()
+            ]
 
             logger.info(f"Built {len(attack_surface)} attack objects")
 
