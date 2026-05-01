@@ -23,22 +23,23 @@ The application is composed of several specialized Python services that communic
 
 1.  **Clone the repository:**
     ```bash
-    git clone <your-repo-url>
-    cd web-vuln-scanner
+    git clone https://github.com/your-username/web-app-vun-scanner.git
+    cd web-app-vun-scanner
     ```
 
 2.  **Configure environment:**
     Create a `.env` file in the root directory (if not already present) to manage service configurations.
 
-3.  **Build and run with Docker Compose:**
+3.  **Start the backend services:**
+    Navigate to the project root and run:
     ```bash
     docker-compose up --build
     ```
     The API Gateway will be available at `http://localhost:8000`.
 
-## �️ WAVS CLI
+## 🛡️ WAVS CLI
 
-Install the CLI from the repository root:
+Once the services are running, open a new terminal, navigate back to the root directory, and install the CLI:
 ```bash
 pip install .
 ```
