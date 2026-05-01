@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "WAVS"
+version = "0.1.0"
+description = "WAVS CLI for orchestrating the WAVS vulnerability scanner."
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+  "httpx>=0.25.2"
+]
+
+[project.scripts]
+WAVS = "wavs.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["wavs*", "asicart*"]

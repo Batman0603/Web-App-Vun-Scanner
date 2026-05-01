@@ -1,0 +1,2 @@
+[console_scripts]
+WAVS = wavs.cli:main

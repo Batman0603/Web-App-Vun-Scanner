@@ -1,3 +1,11 @@
+Metadata-Version: 2.4
+Name: WAVS
+Version: 0.1.0
+Summary: WAVS CLI for orchestrating the WAVS vulnerability scanner.
+Requires-Python: >=3.11
+Description-Content-Type: text/markdown
+Requires-Dist: httpx>=0.25.2
+
 # Web Vulnerability Scanner
 
 A distributed, microservices-based web vulnerability scanner designed to automate the discovery and analysis of security flaws in web applications. This tool orchestrates a multi-stage pipeline—from crawling to report generation—to identify potential injection vulnerabilities like XSS and SQLi.
