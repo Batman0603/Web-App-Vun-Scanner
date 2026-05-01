@@ -5,14 +5,21 @@ import time
 
 import httpx
 
-from asicart import AsciiArt, color_text
+from asicart import color_text
 
 API_GATEWAY_URL = "http://localhost:8000"
 
 
 def display_banner() -> None:
-    art = AsciiArt("WAVS")
-    print(color_text(art.render(), "magenta"))
+    banner = r"""
+ __          __        __      __   _____ 
+ \ \        / /  /\    \ \    / /  / ____|
+  \ \  /\  / /  /  \    \ \  / /  | (___  
+   \ \/  \/ /  / /\ \    \ \/ /    \___ \ 
+    \  /\  /  / ____ \    \  /     ____) |
+     \/  \/  /_/    \_\    \/     |_____/ 
+    """
+    print(color_text(banner, "magenta"))
     print(color_text("Web Application Vulnerability Scanner", "cyan"))
     print(color_text("Run the full pipeline: crawler -> attack-surface -> payload -> detection -> report", "yellow"))
     print()
@@ -54,13 +61,17 @@ def poll_scan_status(scan_id: str) -> Any:
     status_url = f"{API_GATEWAY_URL}/scan/{scan_id}"
     
     last_status_message = ""
+    retry_count = 0
+    max_retries = 10
     
     while True:
-        try:
-            with httpx.Client(timeout=10.0) as client:
+        try: # Removed timeout to wait indefinitely for status updates
+            with httpx.Client(timeout=None) as client:
                 response = client.get(status_url)
                 response.raise_for_status()
                 scan_status = response.json()
+            
+            retry_count = 0  # Reset retry count on success
 
             status = scan_status.get("status", "unknown")
             stage = scan_status.get("stage", "N/A")
@@ -89,8 +100,15 @@ def poll_scan_status(scan_id: str) -> Any:
             print(color_text(f"API Gateway returned error ({exc.response.status_code}): {exc.response.text}. Exiting.", "red"))
             sys.exit(1)
         except Exception as e:
-            print(color_text(f"An unexpected error occurred during polling: {e}. Exiting.", "red"))
-            sys.exit(1)
+            retry_count += 1
+
+            if retry_count >= max_retries:
+                print(color_text("Too many polling failures", "red"))
+                sys.exit(1)
+
+            print(color_text(f"Temporary polling error: {e}", "yellow"))
+            time.sleep(2)
+            continue
 
 
 def main() -> None:
@@ -132,9 +150,10 @@ def main() -> None:
         print(color_text(f"Total scanned pages: {crawler_results.get('total_pages', 'N/A')}", "yellow"))
         print(color_text(f"Vulnerabilities found: {detection_results.get('vulnerabilities_found', 0)}", "yellow"))
         
-        print(color_text("\nFull pipeline output is available in the JSON payload below.", "magenta"))
+        print(color_text("\nFinal Report:", "green"))
         import json
-        print(json.dumps(final_results, indent=2))
+        # Display only the report data
+        print(json.dumps(final_results.get('report', {}), indent=2))
     except httpx.RequestError as exc:
         print(color_text(f"Request failed: {exc}", "red"))
         sys.exit(1)

@@ -17,12 +17,12 @@ class SessionManager:
     This class maintains a persistent session across multiple requests,
     which can improve performance by reusing TCP connections.
     """
-    def __init__(self, timeout: int = 5):
+    def __init__(self, timeout=None):
         """
         Initializes the SessionManager.
 
         Args:
-            timeout (int): The default timeout in seconds for requests.
+            timeout: The default timeout for requests. None means wait indefinitely.
         """
         self.session = requests.Session()
         self.timeout = timeout

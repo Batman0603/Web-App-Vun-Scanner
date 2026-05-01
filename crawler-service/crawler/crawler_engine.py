@@ -58,11 +58,16 @@ class CrawlerEngine:
             logger.info(f"Crawling: {current_url}")
             self.visited.add(current_url)
 
-            response = self.session_manager.get(current_url)
-            if response is None:
-                continue
-
             try:
+                response = self.session_manager.get(current_url)
+                if response is None:
+                    continue
+
+                # Skip non-HTML content (PDFs, images, etc.) to prevent hangs and parsing errors
+                content_type = response.headers.get("Content-Type", "").lower()
+                if "text/html" not in content_type:
+                    continue
+
                 links = extract_links(response.text, self.base_url)
                 forms = extract_forms(response.text)
 
@@ -76,7 +81,7 @@ class CrawlerEngine:
                         queue.append((link, depth + 1))
 
             except Exception as e:
-                logger.error(f"Parsing error at {current_url}: {e}")
+                logger.error(f"Error processing {current_url}: {e}")
                 continue
 
         return results
