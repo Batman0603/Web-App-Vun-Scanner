@@ -1,5 +1,15 @@
 # Web Vulnerability Scanner
 
+```text
+░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░░▒▓██████▓▒░░▒▓█▓▒░░▒▓█▓▒░░▒▓███████▓▒░ 
+░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░        
+░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒▒▓█▓▒░░▒▓█▓▒░        
+░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓████████▓▒░░▒▓█▓▒▒▓█▓▒░ ░▒▓██████▓▒░  
+░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░ ░▒▓█▓▓█▓▒░        ░▒▓█▓▒░ 
+░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░ ░▒▓█▓▓█▓▒░        ░▒▓█▓▒░ 
+ ░▒▓█████████████▓▒░░▒▓█▓▒░░▒▓█▓▒░  ░▒▓██▓▒░  ░▒▓███████▓▒░  
+```
+
 A distributed, microservices-based web vulnerability scanner designed to automate the discovery and analysis of security flaws in web applications. This tool orchestrates a multi-stage pipeline—from crawling to report generation—to identify potential injection vulnerabilities like XSS and SQLi.
 
 ## 🚀 Architecture Overview
