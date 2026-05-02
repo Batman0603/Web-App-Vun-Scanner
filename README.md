@@ -1,4 +1,8 @@
-# Web Vulnerability Scanner
+<div align="center">
+
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:6a00ff,100:ff00cc&height=220&section=header&text=WAVS&fontSize=70&fontColor=ffffff&animation=fadeIn&fontAlignY=38&desc=Web%20Application%20Vulnerability%20Scanner&descAlignY=60"/>
+
+<br>
 
 ```text
 ░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░░▒▓██████▓▒░░▒▓█▓▒░░▒▓█▓▒░░▒▓███████▓▒░ 
