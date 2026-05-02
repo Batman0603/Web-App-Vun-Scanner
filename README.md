@@ -105,6 +105,25 @@ web-vuln-scanner/
 ## ⚖️ Disclaimer
 This tool is for educational and authorized security testing purposes only. Never run this scanner against targets you do not have explicit permission to test.
 
-## 📄 License
+## 👨‍💻 Contributors
+
+<table> 
+<tr> 
+<td align="center">
+<b>Karthikeyan K R (Batman0603)</b><br><br>
+Crawler Service<br>
+Attack Surface Service<br>
+API Gateway Logic
+</td> 
+<td align="center">
+<b>kumaraguru (kumaraguru911)</b><br><br>
+Payload Service<br>
+Detection Service<br>
+Report Service
+</td> 
+</tr> 
+</table>
+
+## � License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
